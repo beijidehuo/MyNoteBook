@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+  <body>
+    <script>
+      var Quo = function (string) {
+          this.status = string;
+      };
+
+      Quo.prototype.get_status = function(){
+          return this.status;
+      };
+
+      var statusObject = {
+          status: 'A-OK'
+      };
+
+      // apply方法允许选择两个参数，第一个及this的值，第二个就是参数数组，这里省略了第二个参数，就是把this
+      // 单纯传入，之后调用get_status方法，在get_status方法内部的this值就是statusObject的this值
+      var status = Quo.prototype.get_status.apply(statusObject);
+      console.log(status);
+    </script>
+  </body>
+</html>
