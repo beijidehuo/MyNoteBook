@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+  <body>
+    <script>
+      var add = function(a, b){
+        return a + b;
+      }
+
+      var myObject = {
+        value: 0,
+        increment: function(inc){
+          this.value += typeof inc === 'number' ? inc : 1;
+        }
+      }
+
+      myObject.increment();
+      document.writeln(myObject.value);
+
+      myObject.increment(2);
+      document.writeln(myObject.value);
+
+      myObject.doubble = function(){
+        var scope = this.value;
+        console.log(scope);
+        var helper = function(){
+          this.value = add(this.value,this.value);
+        }
+
+        helper();
+
+      }
+
+      myObject.doubble();
+      document.writeln(myObject.value);
+
+    </script>
+  </body>
+</html>
