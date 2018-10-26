@@ -1,6 +1,6 @@
-# HTML元素
+# HTML 元素
 
-## HTML一些基本元素
+## HTML 一些基本元素
 
 ```html
 <!DOCTYPE html>
@@ -16,14 +16,16 @@
 
 ### 基本元素下面的扩展元素
 
-#### head标签
+#### head 标签
 
-- 其中head标签有`<h1></h1>`到`<h6></h6>`6个梯度，每个梯度标题从大到小依次递增
-  
-### paragraph标签元素
+- 其中 head 标签有`<h1></h1>`到`<h6></h6>`6 个梯度，每个梯度标题从大到小依次递增
+
+### paragraph 标签元素
 
 表现形式如下
-```
+
+```html
 <p>Hello Paragraph</p>
 ```
-p是英文paragraph的缩写
+
+p 是英文 paragraph 的缩写
