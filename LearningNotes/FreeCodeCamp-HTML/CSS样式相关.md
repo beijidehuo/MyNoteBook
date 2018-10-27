@@ -63,10 +63,10 @@ example
 example
 
 ```html
-<img src="https://www.your-image-source.com/your-image.jpg">
+<img src="https://www.your-image-source.com/your-image.jpg" alt="图片没有加载">
 ```
 
-`img`元素时自关闭元素，不需要结束标记
+`img`元素时自关闭元素，不需要结束标记，其中之后的`alt`元素在图片记载失败的时候会显示出来，可以用于异常时候的提示
 
 ### 通过 css 控制元素的大小、边界、以及间距等
 
@@ -107,3 +107,85 @@ example
 ```
 
 上述方式可以使图片变成一个链接
+
+### 列表添加，包括有序列表和无序列表
+
+#### 分项无序列表
+
+example
+
+```html
+<ul>  // unordered list
+  <li>milk</li>  // list
+  <li>cheese</li>
+</ul>
+```
+
+其中`ul`元素列表代表 unordered list 的意思，`li`html 标签元素代表其中的子项
+
+#### 有序列表
+
+example
+
+```html
+<ol> // ordered list
+  <li>Garfield</li> // list
+  <li>Sylvester</li>
+</ol>
+```
+
+添加了`ol`有序列表的 html 标签后，在添加`li`列表元素标签里面的元素会自动排序
+
+### 获取用户输入`input`
+
+#### 通过文本输入框来获取用户输入
+
+example
+
+```html
+<input type="text" placeholder="预设文本,当用户没有任何输入时,可以给与用户相关提示">
+```
+
+其中`input`元素也是自关闭的
+
+#### 通过表单元素获取用户的输入并提交到服务器
+
+example
+
+```html
+<form action="/submit-cat-photo">
+  <input type="text" placeholder="cat photo URL" required>
+  <button type="submit">Submit</button>
+</form>
+```
+
+- 其中`form`html 元素中的 action 操作代表制定表单提交到服务器的地址
+- 也可以定制一个类型为 submit 的按钮元素来执行 enter 的操作
+- 其中 required 属性代表此项为必填项,用户只有填写了这一项之后才能提交表单,并且这个属性在 **safari** 浏览器中**不起作用**
+
+#### 创建单选按钮
+
+example
+
+```html
+<label><input type="radio" name="indoor-outdoor"> Indoor</label>
+<label><input type="radio" name="indoor-outdoor"> outdoor</label>
+```
+
+- `input`标签元素的**type**属性设置为 radio
+- 所有的单选按钮都需要嵌套进`label`标签元素中,这个是与 text 的输入框不同的
+- 所有关联的单选按钮要具有相同的**name**元素可以实现单选操作
+
+#### 创建多选按钮
+
+example
+
+```html
+<label><input type="checkbox" name="personality"> Loving</label>
+<label><input type="checkbox" name="personality"> hating</label>
+<label><input type="checkbox" name="personality"> doing</label>
+```
+
+- `input`标签元素的**type**属性设置为 checkbox
+- 同样需要嵌套进入`label`元素中
+- **name**应该表示同一属性,在提交表单的时候有用
