@@ -37,16 +37,65 @@ example
 
 通过添加一个`.+cssClassName`这种方式申明了一个 blut-text 的类样式，之后在 html 标签后面直接引用即可，这种类样式可以应用在多个 html 标签元素中。
 
+### 改变特定 id 的样式（ID 选择器）
+
+example
+
+```css
+#cat-photo-element {
+  background-color: green;
+}
+```
+
+通过给`html`标签元素添加 id，之后在 css 里面通过`#+id`的形式给具体 id 的标签元素赋值
+
 ### 改变标签元素的字体属性
 
 example
 
-```html
+```css
 h1 {
   font-size: 30px; // 字体大小
-  font-family: Sans-serif,Monospace; // 字体属性,定义多个代表指定字体层级，当首选的字体不可用时，自动降级到后面的字体，一次类推
+  font-family: Sans-serif, Monospace; // 字体属性,定义多个代表指定字体层级，当首选的字体不可用时，自动降级到后面的字体，一次类推
 }
 ```
+
+### html 布局之 padding(内边距),margin(外边距),border(边框)
+
+example
+
+```css
+.injected-text {
+  margin-bottom: -25px;
+  text-align: center;
+}
+
+.box {
+  border-style: solid; // 边框样式
+  border-color: black; // 边框颜色
+  border-width: 5px; // 边框
+  text-align: center; // 字体对齐方式
+}
+
+.yellow-box {
+  background-color: yellow;
+  padding: 20px 40px 20px 40px; // 内边距，从上开始顺时针方向
+}
+
+.red-box {
+  background-color: red;
+  margin: 20px 40px 20px 40px; // 外边框间距，从上开始顺时针方向
+}
+
+.green-box {
+  background-color: green;
+  margin: 40px 20px 20px 40px;
+}
+```
+
+- 元素 padding 控制元素里面的内容和 border 之间的间距（可以理解成包围内容的边框大小）
+- 元素 margin 控制元素 border 和元素实际所占空间的距离（可以理解成包围整个元素的不边框大小）
+- 打开浏览器开发者工具的 style 项目可以清楚的的知道里面具体怎么设置和分配
 
 ### 通过 link 标签引入外部样式
 
@@ -168,20 +217,21 @@ example
 example
 
 ```html
-<label><input type="radio" name="indoor-outdoor"> Indoor</label>
+<label><input type="radio" name="indoor-outdoor" checked> Indoor</label>
 <label><input type="radio" name="indoor-outdoor"> outdoor</label>
 ```
 
 - `input`标签元素的**type**属性设置为 radio
 - 所有的单选按钮都需要嵌套进`label`标签元素中,这个是与 text 的输入框不同的
 - 所有关联的单选按钮要具有相同的**name**元素可以实现单选操作
+- 添加`checked`属性可以选中该项目
 
 #### 创建多选按钮
 
 example
 
 ```html
-<label><input type="checkbox" name="personality"> Loving</label>
+<label><input type="checkbox" name="personality" checked> Loving</label>
 <label><input type="checkbox" name="personality"> hating</label>
 <label><input type="checkbox" name="personality"> doing</label>
 ```
@@ -189,3 +239,67 @@ example
 - `input`标签元素的**type**属性设置为 checkbox
 - 同样需要嵌套进入`label`元素中
 - **name**应该表示同一属性,在提交表单的时候有用
+- 添加`checked`属性可以选中该项目
+
+## CSS 样式执行优先级
+
+example
+
+```html
+<style>
+  body {
+    background-color: black;
+    font-family: Monospace;
+    color: green;
+  }
+  #orange-text {
+    color: orange;
+  }
+  .pink-text {
+    color: pink;  // 如果在写成  color: pink !important;则最总结果为pink
+  }
+  .blue-text {
+    color: blue;
+  }
+</style>
+<h1 id="orange-text" class="pink-text blue-text" style="color: white">Hello World!</h1>
+```
+
+以上代码最终显示成粉色
+
+- 在**类选择器样式冲突**中，浏览器读取 css 样式的顺序是从上到下，这意味着，在发生冲突时，浏览器会使用最后的 css 声明，所有`pink-text`的申明被`blue-text`覆盖
+- 在**id 样式声明和类选择器冲突**中，由于 id 声明不受类选择器样式的顺序影响，id 声明具有更高的优先级，故即使 id 声明在两个类选择器的上面，其样式也被覆盖成了 orange
+- 最后由于内联样式比其他声明方式的优先级更高，最终元素呈现的效果为白色
+- 如果在样式后面添加 important，则该样式拥有最高优先级，万不得已不建议这么用，会影响其他样式的显示
+
+## css 中颜色的设置
+
+### 采用 hex code(十六进制编码)的形式来选择颜色
+
+example
+
+```css
+<style>
+  body {
+    background-color: #FFFFFF;
+  }
+</style>
+```
+
+1. 0 是 hex code 中最小的一个，代表颜色完成丢失
+2. F 是 hex code 中最大的一个，代表颜色的最大值
+3. 可以采取`#F00`这种仅仅代表 rgb 三种颜色的简短形式
+
+### 采用 rgb 的形式来选择颜色
+
+example
+
+```css
+<style>
+  body {
+    background-color: rgb(0, 0, 0) ;
+  }
+</style>
+```
+
+- rgb 颜色选择器中每个值可以用 0 到 255 这 256 个值去填充，就是 16\*16 的效果，所有这里就用一个十进制数字代表两位 hex code 的颜色，他们能选择的颜色的总数是相同的
